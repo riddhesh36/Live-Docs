@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import Theme from './plugins/Theme';
 import ToolbarPlugin from './plugins/ToolbarPlugin';
 import { HeadingNode } from '@lexical/rich-text';
@@ -9,11 +10,13 @@ import { RichTextPlugin } from '@lexical/react/LexicalRichTextPlugin';
 import { ContentEditable } from '@lexical/react/LexicalContentEditable';
 import { HistoryPlugin } from '@lexical/react/LexicalHistoryPlugin';
 import { LexicalErrorBoundary } from '@lexical/react/LexicalErrorBoundary';
-import  FloatingToolbarPlugin  from '../editor/plugins/FloatingToolbarPlugin'
-import React from 'react';
+import FloatingToolbarPlugin from './plugins/FloatingToolbarPlugin'
 import { liveblocks } from '@/lib/liveblocks';
-import { liveblocksConfig, LiveblocksPlugin, useEditorStatus } from '@liveblocks/react-lexical'
+import { FloatingComposer, FloatingThreads, liveblocksConfig, LiveblocksPlugin, useEditorStatus } from '@liveblocks/react-lexical'
 import Loader from '../Loader';
+import { useThreads } from '@liveblocks/react/suspense';
+import Comments from '../Comments';
+import { DeleteModal } from '../DeleteModal';
 // Catch any errors that occur during Lexical updates and log them
 // or throw them as needed. If you don't throw them, Lexical will
 // try to recover gracefully without losing user data.
@@ -24,6 +27,8 @@ function Placeholder() {
 
 export function Editor({roomId, currentUserType}: {roomId: string, currentUserType: UserType}) {
   const status = useEditorStatus();
+  const { threads } = useThreads();
+
   const initialConfig = liveblocksConfig({
     namespace: 'Editor',
     nodes: [HeadingNode],
@@ -42,7 +47,7 @@ export function Editor({roomId, currentUserType}: {roomId: string, currentUserTy
         <div className='toolbar-wrapper flex min-w-full justify-between'>
 
           <ToolbarPlugin />
-          {/* {currentUserType === 'editor' && <DeleteModal roomId={roomId}/>} */}
+          {currentUserType === 'editor' && <DeleteModal roomId={roomId}/>}
         </div>
 
         <div className='editor-wrapper flex flex-col items-center justify-start'>
@@ -61,7 +66,9 @@ export function Editor({roomId, currentUserType}: {roomId: string, currentUserTy
               </div>
           )}
           <LiveblocksPlugin>
-            
+            <FloatingComposer className='w-[350px]' />
+            <FloatingThreads threads={threads} />
+            <Comments />
           </LiveblocksPlugin>
         </div>
       </div>
