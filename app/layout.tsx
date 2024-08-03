@@ -7,6 +7,7 @@ import {
 import { cn } from "@/lib/utils"
 import { dark } from "@clerk/themes"
 import Provider from "./Provider"
+import { Metadata } from "next"
 
 const fontSans = FontSans({
   subsets: ["latin"],
