@@ -16,6 +16,7 @@ import { Input } from './ui/input';
 import UserTypeSelector from './UserTypeSelector';
 import Collaborator from './Collaborator';
 import { updateDocumentAccess } from '@/lib/actions/room.actions';
+import Loader from './Loader';
   
 
 const ShareModal = ({roomId, collaborators, creatorId, currentUserType}: ShareDocumentDialogProps) => {
