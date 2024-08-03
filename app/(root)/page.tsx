@@ -10,7 +10,7 @@ import Link from 'next/link'
 import { getDocuments } from '@/lib/actions/room.actions'
 import { dateConverter } from '@/lib/utils'
 import { DeleteModal } from '@/components/DeleteModal'
-import { Notifications } from '@/components/Notifications'
+import Notifications from '@/components/Notifications'
 
 const Home = async() => {
 
