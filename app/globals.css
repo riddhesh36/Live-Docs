@@ -304,3 +304,15 @@
 .lb-elevation {
   background: #0f1c34;
 }
+@media only screen and (max-width: 576px) {
+  
+  .cl-internal-w4f4gh > :first-of-type {
+    padding: 0.5rem 0rem;
+  }
+  .cl-internal-s3hdp5{
+    font-size: 14px;
+  }
+  .cl-internal-1b0uo5s{
+    font-size: 14px;
+  }
+}
